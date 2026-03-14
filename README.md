@@ -47,3 +47,14 @@ npm run dev
 - `backend/` — REST API + auth + админка API
 - `nginx/` — reverse proxy + кэширование статики
 - `scripts/` — служебные скрипты
+
+
+## Деплой фронтенда на GitHub Pages (`.github.io`)
+Можно развернуть только статический frontend (без backend внутри GitHub Pages).
+
+Кратко:
+1. Включите `Settings -> Pages -> Source: GitHub Actions`.
+2. Добавьте secrets: `NEXT_PUBLIC_API_URL`, `API_URL`.
+3. Запустите workflow `.github/workflows/deploy-frontend-pages.yml`.
+
+Подробная инструкция: `docs/github-pages.md`.

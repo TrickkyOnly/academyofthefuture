@@ -1,6 +1,11 @@
 import { apiGet } from '@/lib/api';
 import { BlogPost } from '@/types';
 
+export async function generateStaticParams() {
+  const posts = await apiGet<BlogPost[]>('/blog').catch(() => []);
+  return posts.map((p) => ({ slug: p.slug }));
+}
+
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await apiGet<BlogPost>(`/blog/${params.slug}`).catch(() => null);
   if (!post) return <div className="container-page py-10">Пост не найден</div>;

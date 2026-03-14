@@ -1,5 +1,9 @@
 import { apiGet } from '@/lib/api';
 
+export async function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const page = await apiGet<{ title: string; metaTitle?: string; metaDesc?: string }>(`/services/${params.slug}`).catch(() => null);
   return {
