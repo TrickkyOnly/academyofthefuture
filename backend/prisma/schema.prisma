@@ -1,0 +1,76 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ApplicationType {
+  PROGRAM
+  CALLBACK
+  CONSULTATION
+  ONLINE_BOOKING
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+}
+
+model Application {
+  id          String          @id @default(cuid())
+  name        String
+  phone       String
+  email       String?
+  message     String?
+  program     String?
+  preferredAt DateTime?
+  type        ApplicationType
+  status      String          @default("new")
+  createdAt   DateTime        @default(now())
+}
+
+model Specialist {
+  id          String   @id @default(cuid())
+  name        String
+  position    String
+  description String
+  photoUrl    String?
+  createdAt   DateTime @default(now())
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  name      String
+  text      String
+  rating    Int      @default(5)
+  createdAt DateTime @default(now())
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String
+  content     String
+  coverImage  String?
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  metaTitle   String?
+  metaDesc    String?
+  content     String
+  updatedAt   DateTime @updatedAt
+}
