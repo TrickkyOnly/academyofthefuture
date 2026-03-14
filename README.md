@@ -22,6 +22,7 @@ docker compose up --build
 bash scripts/run-localhost.sh
 ```
 Скрипт автоматически:
+- при необходимости устанавливает Docker и Docker Compose plugin (Linux, нужен root/sudo),
 - создаёт `backend/.env` и `frontend/.env.local` из `.env.example` (если файлов нет),
 - собирает и поднимает контейнеры,
 - выводит адреса проекта и полезные команды.
