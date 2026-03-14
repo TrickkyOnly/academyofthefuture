@@ -52,6 +52,14 @@ npm install
 npm run dev
 ```
 
+
+### Частая ошибка Docker build
+Если видите ошибку вида:
+`failed to calculate checksum ... "/app/public": not found`
+
+Причина: в Next.js проекте отсутствует папка `frontend/public`.
+В репозитории уже добавлен `frontend/public/.gitkeep`, чтобы сборка Docker проходила стабильно.
+
 ## VPS деплой (кратко)
 1. Установить Docker + Docker Compose.
 2. Склонировать репозиторий и заполнить `.env` файлы.
