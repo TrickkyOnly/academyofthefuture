@@ -18,14 +18,21 @@ docker compose up --build
 - API: http://localhost/api
 
 ## Запуск в localhost одной командой
+Linux/macOS:
 ```bash
-bash scripts/run-localhost.sh
+sh scripts/run-localhost.sh
 ```
-Скрипт автоматически:
-- при необходимости устанавливает Docker и Docker Compose plugin (Linux, нужен root/sudo),
-- создаёт `backend/.env` и `frontend/.env.local` из `.env.example` (если файлов нет),
-- собирает и поднимает контейнеры,
-- выводит адреса проекта и полезные команды.
+
+Windows:
+```bat
+scripts\run-localhost.bat
+```
+
+Скрипты автоматически:
+- при необходимости устанавливают Docker (`.sh` для Linux, `.bat` для Windows через winget),
+- создают `backend/.env` и `frontend/.env.local` из `.env.example` (если файлов нет),
+- собирают и поднимают контейнеры,
+- выводят адреса проекта и полезные команды.
 
 ## Локальный запуск
 ### 1) Backend
