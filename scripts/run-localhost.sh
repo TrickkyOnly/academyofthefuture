@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh
+set -eu
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 
 SUDO=""
-if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+if [ "$(id -u)" -ne 0 ]; then
   if command -v sudo >/dev/null 2>&1; then
     SUDO="sudo"
   else
@@ -35,8 +35,9 @@ install_docker() {
   $SUDO sh /tmp/get-docker.sh
   rm -f /tmp/get-docker.sh
 
-  if [[ -n "$SUDO" ]]; then
-    $SUDO usermod -aG docker "$USER" || true
+  if [ -n "$SUDO" ]; then
+    CURRENT_USER="${USER:-$(id -un)}"
+    $SUDO usermod -aG docker "$CURRENT_USER" || true
     echo "ℹ️ Пользователь добавлен в группу docker. Если потребуется, перелогиньтесь."
   fi
 
@@ -70,12 +71,12 @@ ensure_docker_and_compose() {
 
 ensure_docker_and_compose
 
-if [[ ! -f backend/.env ]]; then
+if [ ! -f backend/.env ]; then
   cp backend/.env.example backend/.env
   echo "ℹ️ Создан backend/.env из backend/.env.example"
 fi
 
-if [[ ! -f frontend/.env.local ]]; then
+if [ ! -f frontend/.env.local ]; then
   cp frontend/.env.example frontend/.env.local
   echo "ℹ️ Создан frontend/.env.local из frontend/.env.example"
 fi
@@ -87,10 +88,12 @@ echo "🚀 Сборка и запуск сервисов..."
 docker compose up -d --build
 
 echo "⏳ Ожидание доступности API..."
-for i in {1..30}; do
+i=1
+while [ "$i" -le 30 ]; do
   if curl -sf http://localhost/api/health >/dev/null 2>&1 || curl -sf http://localhost/health >/dev/null 2>&1; then
     break
   fi
+  i=$((i + 1))
   sleep 2
 done
 
