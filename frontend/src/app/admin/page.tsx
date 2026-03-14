@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { getClientApiBase } from '@/lib/api';
 
 export default function AdminHomePage() {
   const [stats, setStats] = useState<any>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'}/admin/stats`, {
+    fetch(`${getClientApiBase()}/admin/stats`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((r) => r.json())

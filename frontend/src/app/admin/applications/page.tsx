@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getClientApiBase } from '@/lib/api';
 
 export default function AdminApplicationsPage() {
   const [items, setItems] = useState<any[]>([]);
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'}/admin/applications`, { headers: { Authorization: `Bearer ${token}` } })
+    fetch(`${getClientApiBase()}/admin/applications`, { headers: { Authorization: `Bearer ${token}` } })
       .then((r) => r.json())
       .then(setItems);
   }, []);

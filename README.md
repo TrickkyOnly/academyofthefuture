@@ -60,6 +60,16 @@ npm run dev
 Причина: в Next.js проекте отсутствует папка `frontend/public`.
 В репозитории уже добавлен `frontend/public/.gitkeep`, чтобы сборка Docker проходила стабильно.
 
+
+### Prisma/OpenSSL ошибка в backend
+Если видите ошибку Prisma вида `Could not parse schema engine response` и предупреждения про OpenSSL:
+1. Используйте обновлённый backend-образ (на `node:20-bookworm-slim` с установленным `openssl`).
+2. Пересоберите backend без кэша:
+   ```bash
+   docker compose build --no-cache backend
+   docker compose up -d
+   ```
+
 ## VPS деплой (кратко)
 1. Установить Docker + Docker Compose.
 2. Склонировать репозиторий и заполнить `.env` файлы.

@@ -10,16 +10,18 @@ const nav = [
 
 export function Header() {
   return (
-    <header className="bg-white border-b sticky top-0 z-30">
-      <div className="container-page py-4 flex items-center justify-between">
-        <Link href="/" className="font-bold text-xl text-primary">Центр Будущего</Link>
-        <nav className="flex gap-5 text-sm">
-          {nav.map(([title, href]) => (
-            <Link key={href} href={href} className="hover:text-primary">
-              {title}
-            </Link>
-          ))}
-        </nav>
+    <header className="sticky top-0 z-30">
+      <div className="container-page py-4">
+        <div className="glass rounded-2xl px-5 py-4 flex items-center justify-between">
+          <Link href="/" className="font-bold text-xl text-blue-700">Центр Будущего</Link>
+          <nav className="flex gap-5 text-sm text-blue-700">
+            {nav.map(([title, href]) => (
+              <Link key={href} href={href} className="hover:text-blue-500 transition-colors">
+                {title}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );

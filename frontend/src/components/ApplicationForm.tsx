@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
+import { getClientApiBase } from '@/lib/api';
 
 type Props = { type: 'PROGRAM' | 'CALLBACK' | 'CONSULTATION' | 'ONLINE_BOOKING'; title: string };
 
@@ -21,7 +22,7 @@ export function ApplicationForm({ type, title }: Props) {
       preferredAt: form.get('preferredAt') ? new Date(String(form.get('preferredAt'))).toISOString() : undefined
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'}/applications`, {
+    const res = await fetch(`${getClientApiBase()}/applications`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -36,16 +37,16 @@ export function ApplicationForm({ type, title }: Props) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="bg-white rounded-2xl p-6 shadow grid gap-3">
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <input className="border rounded-lg p-3" name="name" required placeholder="Имя" />
-      <input className="border rounded-lg p-3" name="phone" required placeholder="Телефон" />
-      <input className="border rounded-lg p-3" name="email" placeholder="Email" />
-      <input className="border rounded-lg p-3" name="program" placeholder="Программа" />
-      <input className="border rounded-lg p-3" name="preferredAt" type="datetime-local" />
-      <textarea className="border rounded-lg p-3" name="message" placeholder="Комментарий" />
-      <button className="bg-primary text-white rounded-lg py-3 hover:opacity-90">Отправить</button>
-      {status && <p className="text-sm text-slate-600">{status}</p>}
+    <form onSubmit={onSubmit} className="glass rounded-2xl p-6 grid gap-3">
+      <h3 className="text-xl font-semibold text-blue-700">{title}</h3>
+      <input className="bg-white/80 border border-blue-200 rounded-lg p-3" name="name" required placeholder="Имя" />
+      <input className="bg-white/80 border border-blue-200 rounded-lg p-3" name="phone" required placeholder="Телефон" />
+      <input className="bg-white/80 border border-blue-200 rounded-lg p-3" name="email" placeholder="Email" />
+      <input className="bg-white/80 border border-blue-200 rounded-lg p-3" name="program" placeholder="Программа" />
+      <input className="bg-white/80 border border-blue-200 rounded-lg p-3" name="preferredAt" type="datetime-local" />
+      <textarea className="bg-white/80 border border-blue-200 rounded-lg p-3" name="message" placeholder="Комментарий" />
+      <button className="bg-blue-600 text-white rounded-lg py-3 hover:bg-blue-700 transition-colors">Отправить</button>
+      {status && <p className="text-sm text-blue-700">{status}</p>}
     </form>
   );
 }
