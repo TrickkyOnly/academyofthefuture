@@ -82,6 +82,13 @@ docker compose exec backend node prisma/seed.js
 
 В `docker-compose.yml` backend уже запускается с `prisma db push` перед сидированием.
 
+### Фото с оригинального сайта
+Добавлен скрипт для выгрузки изображений с исходного сайта в локальную папку:
+```bash
+python scripts/fetch-original-photos.py "https://центр-будущего.рф"
+```
+Изображения сохраняются в `frontend/public/images/original`.
+
 ## VPS деплой (кратко)
 1. Установить Docker + Docker Compose.
 2. Склонировать репозиторий и заполнить `.env` файлы.

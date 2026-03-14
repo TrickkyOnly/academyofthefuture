@@ -29,7 +29,7 @@ export default async function HomePage() {
         <h2 className="text-2xl font-semibold mb-4 text-blue-700">Специалисты</h2>
         <div className="grid md:grid-cols-3 gap-4">
           {specialists.length ? specialists.slice(0, 3).map((s) => (
-            <div key={s.id} className="glass-soft p-5 rounded-2xl"><p className="font-semibold">{s.name}</p><p className="text-sm text-blue-600">{s.position}</p><p className="mt-2 text-sm">{s.description}</p></div>
+            <div key={s.id} className="glass-soft p-5 rounded-2xl">{s.photoUrl && <img src={s.photoUrl} alt={s.name} className="w-full h-44 object-cover rounded-xl mb-3" />}<p className="font-semibold">{s.name}</p><p className="text-sm text-blue-600">{s.position}</p><p className="mt-2 text-sm">{s.description}</p></div>
           )) : <div className="glass-soft p-5 rounded-2xl md:col-span-3">Список специалистов загружается.</div>}
         </div>
       </section>
@@ -40,7 +40,7 @@ export default async function HomePage() {
       <ApplicationForm type="PROGRAM" title="Форма заявки" />
 
       <section className="grid md:grid-cols-2 gap-4">
-        <div className="glass-soft rounded-2xl p-5"><h2 className="text-xl font-semibold mb-2 text-blue-700">Карта</h2><p>г. Москва, ул. Примерная, 10</p><div className="h-52 mt-3 bg-blue-50 rounded-lg flex items-center justify-center">Map placeholder</div></div>
+        <div className="glass-soft rounded-2xl p-5"><h2 className="text-xl font-semibold mb-2 text-blue-700">Карта</h2><p>г. Москва, ул. Примерная, 10</p><iframe className="h-52 mt-3 w-full rounded-lg border border-blue-100" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=37.61%2C55.74%2C37.65%2C55.77&layer=mapnik" /></div>
         <div className="glass-soft rounded-2xl p-5"><h2 className="text-xl font-semibold mb-2 text-blue-700">Контакты</h2><p>+7 (999) 000-00-00</p><p>info@future-center.ru</p><p>Пн–Сб: 09:00–21:00</p></div>
       </section>
 

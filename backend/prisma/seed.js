@@ -15,8 +15,8 @@ async function main() {
 
   await prisma.specialist.createMany({
     data: [
-      { name: 'Анна Петрова', position: 'Клинический психолог', description: 'Работа с тревожностью и самооценкой.' },
-      { name: 'Максим Иванов', position: 'Семейный психолог', description: 'Сопровождение подростков и родителей.' }
+      { name: 'Анна Петрова', position: 'Клинический психолог', description: 'Работа с тревожностью и самооценкой.', photoUrl: '/images/specialist-anna.svg' },
+      { name: 'Максим Иванов', position: 'Семейный психолог', description: 'Сопровождение подростков и родителей.', photoUrl: '/images/specialist-maxim.svg' }
     ],
     skipDuplicates: true
   });
@@ -36,7 +36,8 @@ async function main() {
       slug: 'kak-pomoch-podrostku-pri-stresse',
       title: 'Как помочь подростку при стрессе',
       excerpt: 'Практические шаги для родителей и подростков.',
-      content: 'Длинная экспертная статья о стрессе и поддержке подростков...'
+      content: 'Длинная экспертная статья о стрессе и поддержке подростков...',
+      coverImage: '/images/specialist-anna.svg'
     }
   });
 }
