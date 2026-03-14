@@ -29,7 +29,7 @@ scripts\run-localhost.bat
 ```
 
 Скрипты автоматически:
-- при необходимости устанавливают Docker (`.sh` для Linux, `.bat` для Windows через winget),
+- при необходимости устанавливают Docker (`.sh` для Linux, `.bat` для Windows через winget и автозапуск Docker Desktop),
 - создают `backend/.env` и `frontend/.env.local` из `.env.example` (если файлов нет),
 - собирают и поднимают контейнеры,
 - выводят адреса проекта и полезные команды.
