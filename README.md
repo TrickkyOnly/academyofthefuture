@@ -70,6 +70,18 @@ npm run dev
    docker compose up -d
    ```
 
+
+### Ошибка `The table public.User does not exist`
+Это значит, что схема БД не была применена, а сидер уже пытается писать данные.
+
+Исправление:
+```bash
+docker compose exec backend npx prisma db push
+docker compose exec backend node prisma/seed.js
+```
+
+В `docker-compose.yml` backend уже запускается с `prisma db push` перед сидированием.
+
 ## VPS деплой (кратко)
 1. Установить Docker + Docker Compose.
 2. Склонировать репозиторий и заполнить `.env` файлы.
